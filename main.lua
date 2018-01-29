@@ -9,9 +9,9 @@ function love.load()
   env.height = love.graphics.getHeight()
   env.collideDown = 100
 
-  physics.fallMultiplier = 120
-  physics.lowJumpMultiplier = 100
-  physics.grav = -5
+  physics.fallMultiplier = 80
+  physics.lowJumpMultiplier = 60
+  physics.grav = -15
 
   p1.xpos = 300
   p1.ypos = 300
@@ -32,7 +32,7 @@ function love.update(dt)
     p1.xvel = p1.xvel + 200
   end
   if love.keyboard.isDown('w') and p1.grounded then
-    p1.yvel = 300
+    p1.yvel = 400
   end
   p1.yvel = p1.yvel + physics.grav
   if p1.yvel < 0 then
@@ -45,10 +45,11 @@ end
 
 function love.draw()
   love.graphics.rectangle("fill", 0, env.height, env.width, -env.collideDown)
-  love.graphics.draw(p1.img, math.floor(p1.xpos), math.floor(env.height-p1.ypos))
+  love.graphics.draw(p1.img, math.floor(p1.xpos+0.5), math.floor(env.height-p1.ypos+0.5))
 
   if debug then
     love.graphics.circle("fill", p1.xpos, env.height-p1.ypos, 5)
+    love.graphics.print("x: "..math.floor(p1.xpos+0.5),0,0)
   end
 end
 
